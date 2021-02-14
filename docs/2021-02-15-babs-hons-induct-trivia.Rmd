@@ -1,0 +1,66 @@
+---
+title: "BABS honours induction - Trivia questions"
+author: "Peter Geelan-Small"
+date: "13/02/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+
+```{r}
+
+library(ggplot2)
+library(grid)
+
+```
+
+
+## Plot of normal curve
+
+Note title banner code from here:
+
+https://stackoverflow.com/questions/42351011/customize-background-color-of-ggtitle
+
+
+
+```{r}
+
+zz <- seq(-3, 3, length.out = 100)
+
+yy <- dnorm(zz)
+
+dd <- data.frame(zz = zz, yy = yy)
+
+dd$tempvar <- " Normal distribution - the famous 'bell curve' "
+
+pp <- ggplot(dd, aes(x = zz, y = yy)) +
+  geom_line(size = 1, colour = "#8000ff") +
+  labs(x = "Z", y = "Density") +
+  #ggtitle("Normal distribution - the famous 'bell curve'") +
+  scale_colour_manual(name="", values=c(Com = "#228b22") ) +
+  theme_classic()
+
+
+z_curve <- 
+  pp + 
+  facet_grid(. ~ tempvar) +
+        theme(strip.background = element_rect(fill = "#9999ff"),
+              strip.text = element_text(
+                size = 10, colour = "white"))
+
+print(z_curve)
+
+```
+
+
+```{r}
+
+ggsave("../figs/z_curve.png", width = 5, height = 4)
+
+```
+
