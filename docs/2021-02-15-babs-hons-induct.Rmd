@@ -945,7 +945,9 @@ knitr::include_graphics("../figs/Stats Central_Photo_July2020.jpg")
   - Naegle 2015, Criteria for biological reproducibility: what does "n" mean? <https://doi.org/10.1126/scisignal.aab1125>
   - Nuzzo 2018, Tips for communicating statistical significance <https://www.nih.gov/about-nih/what-we-do/science-health-public-trust/perspectives/science-health-public-trust/tips-communicating-statistical-significance>
   
+ <br>
  
+- Taylor, L. A.,  2018, Twenty things I wish I’d known when I started my PhD, *Nature*, <https://doi.org/10.1038/d41586-018-07332-x>
  
 ## Resources - Guidelines continued {.smaller}
 
