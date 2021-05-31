@@ -92,7 +92,7 @@ library(emmeans)
 ##  Function for coloured text depending on html or pdf output
 
 ##  We can then use the code in an inline R expression:
-##    `r colorise("some words in red", "red")`
+##    `r colourise("some words in red", "red")`
 
 
 ##  From:
