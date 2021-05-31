@@ -1,7 +1,7 @@
 ---
 title: "*The importance of statistics* <br> BABS Honours Induction"
 author: "Peter Geelan-Small, UNSW Stats Central"
-date: "15/02/2021"
+date: "31/05/2021"
 output: 
   ioslides_presentation:
     logo: StatsCentralLogo_ioslides.png
@@ -251,6 +251,8 @@ How much data do I need to be able to detect the difference I want to detect?
 - Difference to detect - what size is biologically/clinically important?
 
 - Variability - how variable (noisy) is what I'm studying?
+
+https://vbiostatps.app.vumc.org/ps/
 
 
 ## Reproducibility - experimental design
@@ -510,8 +512,6 @@ NDRM.CH.Geno.df <-
 ```
 
 
-<br>
-
 A glimpse at the data
 
 - 606 independent measurements of change in percentage strength.
@@ -525,6 +525,15 @@ NDRM.CH.Geno.df %>%
 
 ```
 
+```{r echo = F, eval = F}
+
+t.test(Trait ~ Genotype, data = NDRM.CH.Geno.df, var.equal = T)
+
+mean_diff <- 56.05441 - 50.43503 
+
+mean_diff
+
+```
 
 
 ## P values - What's the idea behind them? 
@@ -542,7 +551,7 @@ ggplot(NDRM.CH.Geno.df, aes(x = Trait, y = Genotype)) +
         axis.title = element_text(size = 13))
 
 ```
-
+Observed difference in means is 5.62 (%)
 
 ## P values - What's the idea behind them? 
 
@@ -561,7 +570,7 @@ One possibility: The difference in means (we could use any other sensible statis
 1.  We assume change (%) in mean strength is the same for both genotypes (Null hypothesis).
 2.  Shuffle the two genotype labels on the data values to get many possible arrangements of the order.
 3.  Calculate the mean strength change for the two genotypes for each arrangement.
-4.  Find the difference between the two genotype means for each arrangement.
+4.  Find the difference between the two genotype means for each arrangement. Do steps 2, 3 and 4 many times.
 5.  Look at the pattern of values of all these differences.
 6.  See **how unusual** the difference is that we got from our sample data.
 
