@@ -1,6 +1,13 @@
 base
+methods
+datasets
+utils
+grDevices
+graphics
+stats
 boot
 lattice
+grid
 MASS
 nlme
 ggplot2
@@ -18,6 +25,7 @@ wordcloud
 kableExtra
 survival
 coin
+emmeans
 combinat
 gdata
 gtools

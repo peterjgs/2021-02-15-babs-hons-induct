@@ -1,7 +1,7 @@
 ---
 title: "*The importance of statistics* <br> BABS Honours Induction"
 author: "Peter Geelan-Small, UNSW Stats Central"
-date: "15/02/2021"
+date: "14/02/2022"
 output: 
   ioslides_presentation:
     logo: StatsCentralLogo_ioslides.png
@@ -225,6 +225,7 @@ knitr::include_graphics("../figs/baker_research_costs.png")
 ```
 
 
+
 School of BABS Seminar - 20 November, 2020
 
 `r colourise("**Why are so many cell and molecular biology experiments and findings irreproducible?**", "#cc6600")`
@@ -251,6 +252,8 @@ How much data do I need to be able to detect the difference I want to detect?
 - Difference to detect - what size is biologically/clinically important?
 
 - Variability - how variable (noisy) is what I'm studying?
+
+Sample size calculator: https://vbiostatps.app.vumc.org/ps/
 
 
 ## Reproducibility - experimental design
@@ -333,7 +336,7 @@ pwr.all$diff_sd <-
 pwr.all %>% 
   ggplot(., aes(x = n, y = pwr, colour = diff_sd)) +
   geom_line(size = 1) +
-  labs(x = "Group sample size", y = "Power") +
+  labs(x = "Group sample size", y = "Power", colour = "Diff (sd)") +
   ggtitle("Power for difference in means of two independent groups (t-test)") +
   theme_classic()
 
@@ -385,7 +388,7 @@ https://forms.gle/9v92pg9vs6toDZeC7
 
 - Technical replication is useful to increase the precision of your measurements.
 
-- Biological replication is what counts towards power.
+- Biological replication (this is what "sample size" means) is what counts towards power.
 
 - There is no statistical justification for a sample size of n = 3!
 
@@ -402,7 +405,7 @@ https://www.youtube.com/watch?v=kMYxd6QeAss
 
 <br>
 
-> - Variance measures variation, which introduces uncertainty into estimates
+> - Variance ( $= (\mathrm{std. dev.})^2$) measures variation, which introduces uncertainty into estimates
 
 > - Statistics is the science of learning from data, and of measuring, controlling and communicating uncertainty<footnote content = "Davidian & Louis 2012 doi: 10.1126/science.1218685"></footnote>
 
@@ -510,8 +513,6 @@ NDRM.CH.Geno.df <-
 ```
 
 
-<br>
-
 A glimpse at the data
 
 - 606 independent measurements of change in percentage strength.
@@ -525,6 +526,15 @@ NDRM.CH.Geno.df %>%
 
 ```
 
+```{r echo = F, eval = F}
+
+t.test(Trait ~ Genotype, data = NDRM.CH.Geno.df, var.equal = T)
+
+mean_diff <- 56.05441 - 50.43503 
+
+mean_diff
+
+```
 
 
 ## P values - What's the idea behind them? 
@@ -542,7 +552,7 @@ ggplot(NDRM.CH.Geno.df, aes(x = Trait, y = Genotype)) +
         axis.title = element_text(size = 13))
 
 ```
-
+Observed difference in means is 5.62 (%)
 
 ## P values - What's the idea behind them? 
 
@@ -561,7 +571,7 @@ One possibility: The difference in means (we could use any other sensible statis
 1.  We assume change (%) in mean strength is the same for both genotypes (Null hypothesis).
 2.  Shuffle the two genotype labels on the data values to get many possible arrangements of the order.
 3.  Calculate the mean strength change for the two genotypes for each arrangement.
-4.  Find the difference between the two genotype means for each arrangement.
+4.  Find the difference between the two genotype means for each arrangement. Do steps 2, 3 and 4 many times.
 5.  Look at the pattern of values of all these differences.
 6.  See **how unusual** the difference is that we got from our sample data.
 
@@ -793,7 +803,7 @@ tt0 <- t.test(Trait ~ Genotype, NDRM.CH.Geno.df, var.equal = T)
 ```
 
 
-- `r colourise("P value is an indication of *how unusual* a sample is, assuming the null hypothesis that the two groups have the same mean is true.", "#8000ff")`
+- `r colourise("P value is an indication of *how unusual* a sample is, assuming the null hypothesis is true (in this case, that the two groups have the same mean).", "#8000ff")`
 
 - Proportion from permutation test is our P value for that test: 
 
@@ -809,7 +819,7 @@ tt0 <- t.test(Trait ~ Genotype, NDRM.CH.Geno.df, var.equal = T)
 ## P values - What does a P value mean? 
 
 
-`r colourise("The P value is the probability of getting the data we got, *assuming the null hypothesis of equal means is true*.", "#8000ff")`
+`r colourise("The P value is the probability of getting the data we got, *assuming the null hypothesis is true*.", "#8000ff")`
 
 - It tells us how consistent with the null hypothesis our sample data is.
 
@@ -867,7 +877,7 @@ https://forms.gle/jfpaMggJcvxvwbFo7
 ## Where does statistics fit into research?
 
 
-To consult the statistician after an experiment is finished is often merely to ask [them] to conduct a post mortem examination. [They] can perhaps say what the experiment died of.<footnote content = "Fisher R, 1938. Sankhya 4: 14-17"></footnote>
+*To consult the statistician after an experiment is finished is often merely to ask [them] to conduct a post mortem examination. [They] can perhaps say what the experiment died of.*<footnote content = "Fisher R, 1938. Sankhya 4: 14-17"></footnote>
 
 <br>
 
